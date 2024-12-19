@@ -107,6 +107,54 @@ public class TennisGameTest {
 		assertEquals("Player 2 win score incorrect", "player2 wins", score);
 	}
 	
+	@Test
+	public void testTennisGame_Player1WinAfterDeuce() throws TennisGameException {
+		//Arrange
+		TennisGame game = new TennisGame();
+		//Act
+		game.player1Scored();
+		game.player1Scored();
+		game.player1Scored();
+		
+		game.player2Scored();
+		game.player2Scored();
+		game.player2Scored();
+		
+		game.player1Scored();
+		game.player2Scored();
+		
+		game.player1Scored();
+		game.player1Scored();
+		//Act
+		String score = game.getScore();
+		// Assert
+		assertEquals("Player 1 win after deuce failed", "player1 wins", score);
+	}
+	
+	@Test
+	public void testTennisGame_Player2WinAfterDeuce() throws TennisGameException {
+		//Arrange
+		TennisGame game = new TennisGame();
+		//Act
+		game.player2Scored();
+		game.player2Scored();
+		game.player2Scored();
+		
+		game.player1Scored();
+		game.player1Scored();
+		game.player1Scored();
+
+		game.player2Scored();
+		game.player1Scored();
+
+		game.player2Scored();
+		game.player2Scored();
+		//Act
+		String score = game.getScore();
+		// Assert
+		assertEquals("Player 2 win after deuce failed", "player2 wins", score);
+	}
+	
 	@Test 
 	public void testTennisGame_Player1Advantage() throws TennisGameException {
 		//Arrange
@@ -146,17 +194,31 @@ public class TennisGameTest {
 	}
 	
 	@Test 
-	public void testTennisGame_Score15To30() throws TennisGameException {
+	public void testTennisGame_Score0To1() throws TennisGameException {
 		//Arrange
 		TennisGame game = new TennisGame();
 		
+		game.player2Scored();
+		//Act
+		String score = game.getScore();
+		// Assert
+		assertEquals("love - 15 score incorrect", "love - 15", score);
+	}
+	
+	@Test 
+	public void testTennisGame_Score2To3() throws TennisGameException {
+		//Arrange
+		TennisGame game = new TennisGame();
+
 		game.player1Scored();
-		
+		game.player1Scored();
+
+		game.player2Scored();
 		game.player2Scored();
 		game.player2Scored();
 		//Act
 		String score = game.getScore();
 		// Assert
-		assertEquals("15 - 30 score incorrect", "15 - 30", score);
+		assertEquals("30 - 40 score incorrect", "30 - 40", score);
 	}
 }
